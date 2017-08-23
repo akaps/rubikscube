@@ -314,7 +314,7 @@ public class RubiksCube {
 	private void rotateFaceEdges(CubeFace face, boolean clockwise) {
 		CubeCoordinate coord1 = new CubeCoordinate(face, 0, 1);
 		CubeCoordinate coord2 = new CubeCoordinate(face, 1, 2);
-		CubeCoordinate coord3 = new CubeCoordinate(face, 2, 2);
+		CubeCoordinate coord3 = new CubeCoordinate(face, 2, 1);
 		CubeCoordinate coord4 = new CubeCoordinate(face, 1, 0);
 		fourWayRotate(coord1, coord2, coord3, coord4, clockwise);
 	}
