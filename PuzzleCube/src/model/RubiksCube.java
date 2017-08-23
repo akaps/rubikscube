@@ -299,26 +299,37 @@ public class RubiksCube {
 	}
 
 	private void rotateFace(CubeFace face, boolean clockwise) {
-		int iFace = face.ordinal();
-		int swap = pieces[iFace][0][0];
+		rotateFaceCorners(face, clockwise);
+		rotateFaceEdges(face, clockwise);
+	}
+
+	private void rotateFaceCorners(CubeFace face, boolean clockwise) {
+		int swap = pieces[face.ordinal()][0][0];
 		if (clockwise) {
-			pieces[iFace][0][0] = pieces[iFace][1][0];
-			pieces[iFace][1][0] = pieces[iFace][2][0];
-			pieces[iFace][2][0] = pieces[iFace][2][1];
-			pieces[iFace][2][1] = pieces[iFace][2][2];
-			pieces[iFace][2][2] = pieces[iFace][1][2];
-			pieces[iFace][1][2] = pieces[iFace][0][2];
-			pieces[iFace][0][2] = pieces[iFace][0][1];
-			pieces[iFace][0][1] = swap;
+			pieces[face.ordinal()][0][0] = pieces[face.ordinal()][0][2];
+			pieces[face.ordinal()][0][2] = pieces[face.ordinal()][2][2];
+			pieces[face.ordinal()][2][2] = pieces[face.ordinal()][2][0];
+			pieces[face.ordinal()][2][0] = swap;
 		} else {
-			pieces[iFace][0][0] = pieces[iFace][0][1];
-			pieces[iFace][0][1] = pieces[iFace][0][2];
-			pieces[iFace][0][2] = pieces[iFace][1][2];
-			pieces[iFace][1][2] = pieces[iFace][2][2];
-			pieces[iFace][2][2] = pieces[iFace][2][1];
-			pieces[iFace][2][1] = pieces[iFace][2][0];
-			pieces[iFace][2][0] = pieces[iFace][1][0];
-			pieces[iFace][1][0] = swap;
+			pieces[face.ordinal()][0][0] = pieces[face.ordinal()][2][0];
+			pieces[face.ordinal()][2][0] = pieces[face.ordinal()][2][2];
+			pieces[face.ordinal()][2][2] = pieces[face.ordinal()][0][2];
+			pieces[face.ordinal()][0][2] = swap;
+		}
+	}
+
+	private void rotateFaceEdges(CubeFace face, boolean clockwise) {
+		int swap = pieces[face.ordinal()][0][1];
+		if (clockwise) {
+			pieces[face.ordinal()][0][1] = pieces[face.ordinal()][1][2];
+			pieces[face.ordinal()][1][2] = pieces[face.ordinal()][2][1];
+			pieces[face.ordinal()][2][1] = pieces[face.ordinal()][1][0];
+			pieces[face.ordinal()][1][0] = swap;
+		} else {
+			pieces[face.ordinal()][0][1] = pieces[face.ordinal()][1][0];
+			pieces[face.ordinal()][1][0] = pieces[face.ordinal()][2][1];
+			pieces[face.ordinal()][2][1] = pieces[face.ordinal()][1][2];
+			pieces[face.ordinal()][1][2] = swap;
 		}
 	}
 
