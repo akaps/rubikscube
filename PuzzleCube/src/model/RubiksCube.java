@@ -304,33 +304,19 @@ public class RubiksCube {
 	}
 
 	private void rotateFaceCorners(CubeFace face, boolean clockwise) {
-		int swap = pieces[face.ordinal()][0][0];
-		if (clockwise) {
-			pieces[face.ordinal()][0][0] = pieces[face.ordinal()][0][2];
-			pieces[face.ordinal()][0][2] = pieces[face.ordinal()][2][2];
-			pieces[face.ordinal()][2][2] = pieces[face.ordinal()][2][0];
-			pieces[face.ordinal()][2][0] = swap;
-		} else {
-			pieces[face.ordinal()][0][0] = pieces[face.ordinal()][2][0];
-			pieces[face.ordinal()][2][0] = pieces[face.ordinal()][2][2];
-			pieces[face.ordinal()][2][2] = pieces[face.ordinal()][0][2];
-			pieces[face.ordinal()][0][2] = swap;
-		}
+		CubeCoordinate coord1 = new CubeCoordinate(face, 0, 0);
+		CubeCoordinate coord2 = new CubeCoordinate(face, 0, 2);
+		CubeCoordinate coord3 = new CubeCoordinate(face, 2, 2);
+		CubeCoordinate coord4 = new CubeCoordinate(face, 2, 0);
+		fourWayRotate(coord1, coord2, coord3, coord4, clockwise);
 	}
 
 	private void rotateFaceEdges(CubeFace face, boolean clockwise) {
-		int swap = pieces[face.ordinal()][0][1];
-		if (clockwise) {
-			pieces[face.ordinal()][0][1] = pieces[face.ordinal()][1][2];
-			pieces[face.ordinal()][1][2] = pieces[face.ordinal()][2][1];
-			pieces[face.ordinal()][2][1] = pieces[face.ordinal()][1][0];
-			pieces[face.ordinal()][1][0] = swap;
-		} else {
-			pieces[face.ordinal()][0][1] = pieces[face.ordinal()][1][0];
-			pieces[face.ordinal()][1][0] = pieces[face.ordinal()][2][1];
-			pieces[face.ordinal()][2][1] = pieces[face.ordinal()][1][2];
-			pieces[face.ordinal()][1][2] = swap;
-		}
+		CubeCoordinate coord1 = new CubeCoordinate(face, 0, 1);
+		CubeCoordinate coord2 = new CubeCoordinate(face, 1, 2);
+		CubeCoordinate coord3 = new CubeCoordinate(face, 2, 2);
+		CubeCoordinate coord4 = new CubeCoordinate(face, 1, 0);
+		fourWayRotate(coord1, coord2, coord3, coord4, clockwise);
 	}
 
 	private void fourWayRotate(CubeCoordinate first, CubeCoordinate second, CubeCoordinate third, CubeCoordinate fourth,
